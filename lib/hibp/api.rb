@@ -1,9 +1,9 @@
 module Hibp
   class Api
-    BASE_URI = 'https://haveibeenpwned.com/api'
+    BASE_URI = 'https://haveibeenpwned.com/api/v2'
 
     def self.breached_account?(email)
-      JSON.parse(http_client.do_get("#{BASE_URI}/breachedaccount/#{CGI.escape(email)}").body)
+      JSON.parse(http_client.do_get("#{BASE_URI}/pasteaccount/#{CGI.escape(email)}").body)
     rescue Hibp::HttpClient::ClientError => ex
       return false if ex.status == 404
       raise ex
